@@ -5,14 +5,14 @@
 <h1 align="center">StarAxis</h1>
 
 <p align="center">
-  A password and notes manager that stores all data locally.
+  A password manager that stores all data locally.
 </p>
 
 <p align="center">
   <a href="README.zh-CN.md">简体中文</a>
 </p>
 
-StarAxis (星枢) is a password and notes manager that stores all data locally in
+StarAxis (星枢) is a password manager that stores all data locally in
 a portable, encrypted `.panda8` vault. It does not use SQLite, does not require
 an account, and does not upload your vault to a remote service.
 ![](img/sy-en.jpg)
