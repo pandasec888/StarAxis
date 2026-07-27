@@ -1,4 +1,4 @@
-<p align="center">
+<img width="2200" height="1440" alt="bxh-zh" src="https://github.com/user-attachments/assets/46031fdb-40f1-48bd-be89-dbe7224a2ebe" /><p align="center">
   <img src="apps/desktop/src-tauri/icons/128x128.png" width="96" height="96" alt="星枢图标">
 </p>
 
@@ -14,6 +14,9 @@
 
 星枢是一款所有数据都存储在本地的密码、笔记管理器。账号密码和安全笔记保存在可移动、全加密的
 `.panda8` 保险库中。它不使用 SQLite，不要求注册账号，也不会将保险库上传到远程服务。
+![](img/sy-zh.jpg)
+![](img/bxh-zh.jpg)
+![](img/bxk-zh.jpg)
 
 ## 主要功能
 
