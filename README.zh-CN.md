@@ -1,4 +1,3 @@
-<img width="2200" height="1440" alt="bxh-zh" src="https://github.com/user-attachments/assets/46031fdb-40f1-48bd-be89-dbe7224a2ebe" /><p align="center">
   <img src="apps/desktop/src-tauri/icons/128x128.png" width="96" height="96" alt="星枢图标">
 </p>
 
