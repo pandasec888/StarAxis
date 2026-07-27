@@ -1,0 +1,67 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "StarAxis",
+  "version": "1.0.0",
+  "identifier": "com.vaultx.desktop",
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "StarAxis",
+        "width": 1100,
+        "height": 720,
+        "minWidth": 760,
+        "minHeight": 520,
+        "resizable": true,
+        "devtools": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; connect-src ipc: http://ipc.localhost; img-src 'self' asset: http://asset.localhost; style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "fileAssociations": [
+      {
+        "ext": ["panda8"],
+        "name": "StarAxis Vault",
+        "description": "StarAxis encrypted vault",
+        "role": "Editor",
+        "mimeType": "application/x-staraxis-vault",
+        "rank": "Owner",
+        "exportedType": {
+          "identifier": "com.staraxis.vault",
+          "conformsTo": ["public.data"]
+        }
+      }
+    ],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "macOS": {
+      "minimumSystemVersion": "11.0"
+    },
+    "windows": {
+      "webviewInstallMode": {
+        "type": "offlineInstaller",
+        "silent": true
+      },
+      "nsis": {
+        "compression": "zlib",
+        "installerIcon": "icons/icon.ico",
+        "uninstallerIcon": "icons/icon.ico"
+      }
+    }
+  }
+}

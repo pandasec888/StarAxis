@@ -1,0 +1,34 @@
+{
+  "name": "@vaultx/browser-extension",
+  "version": "1.0.0",
+  "author": "panda8",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm build:chrome && pnpm build:edge && pnpm build:firefox && pnpm validate",
+    "build:chrome": "vite build --mode chrome",
+    "build:edge": "vite build --mode edge",
+    "build:firefox": "vite build --mode firefox",
+    "dev": "vite --host 127.0.0.1 --port 1430",
+    "test": "vitest run",
+    "typecheck": "tsc -b --pretty false",
+    "validate": "node scripts/validate-build.mjs"
+  },
+  "dependencies": {
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
+    "@types/chrome": "0.1.20",
+    "@types/node": "25.5.0",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.3",
+    "jsdom": "29.1.1",
+    "typescript": "6.0.3",
+    "vite": "8.1.5",
+    "vitest": "4.1.10"
+  }
+}

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StarAxis编辑页测试</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const root = Array(16).fill(1);
+      const work = Array(16).fill(2);
+      const login = Array(16).fill(3);
+      const note = Array(16).fill(4);
+      const groups = [
+        { id: root, parent_id: null, name: "Root" },
+        { id: work, parent_id: root, name: "工作" },
+      ];
+      const items = [
+        {
+          id: login,
+          kind: "login",
+          title: "墨者学院",
+          favorite: true,
+          tags: ["学习", "安全"],
+          primary_username: "panda8@example.com",
+          primary_url: "mozhe.cn",
+          deleted: false,
+        },
+        {
+          id: note,
+          kind: "secure_note",
+          title: "服务器恢复说明",
+          favorite: false,
+          tags: ["运维"],
+          deleted: false,
+        },
+      ];
+
+      window.__TAURI_INTERNALS__ = {
+        invoke: async (command, args) => {
+          if (command === "session_state") return "unlocked";
+          if (command === "record_user_activity") return null;
+          if (command === "list_groups") return groups;
+          if (command === "list_items") return items;
+          if (command === "get_settings")
+            return {
+              auto_lock_seconds: 300,
+              clipboard_clear_seconds: 30,
+              lock_on_minimize: false,
+              backup_versions: 3,
+            };
+          if (command === "get_item_detail") {
+            const secureNote = JSON.stringify(args.id) === JSON.stringify(note);
+            return secureNote
+              ? {
+                  id: note,
+                  group_id: work,
+                  kind: "secure_note",
+                  title: "服务器恢复说明",
+                  favorite: false,
+                  tags: ["运维"],
+                  usernames: [],
+                  password: null,
+                  urls: [],
+                  url_match_modes: [],
+                  notes: null,
+                  content:
+                    "恢复前先确认备份完整性。\n\n1. 验证恢复介质\n2. 切换维护模式\n3. 执行恢复并复核服务",
+                  custom_fields: [],
+                  history: [],
+                }
+              : {
+                  id: login,
+                  group_id: work,
+                  kind: "login",
+                  title: "墨者学院",
+                  favorite: true,
+                  tags: ["学习", "安全"],
+                  usernames: ["panda8@example.com"],
+                  password: "correct-horse-battery-staple",
+                  urls: ["mozhe.cn", "https://www.mozhe.cn/"],
+                  url_match_modes: ["anywhere_on_website", "exact_host"],
+                  notes: "网络安全学习平台账号",
+                  content: null,
+                  custom_fields: [],
+                  history: [],
+                };
+          }
+          if (command === "generate_password_value")
+            return "Generated-Password-42!";
+          if (command === "update_login" || command === "update_secure_note")
+            return null;
+          return null;
+        },
+      };
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

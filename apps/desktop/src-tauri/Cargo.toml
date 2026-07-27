@@ -1,0 +1,37 @@
+[package]
+name = "vaultx-desktop"
+description = "StarAxis cross-platform desktop shell"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[lib]
+name = "vaultx_desktop_lib"
+crate-type = ["lib", "cdylib", "staticlib"]
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
+
+[build-dependencies]
+tauri-build = { version = "2.6.3", features = [] }
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+tauri = { version = "2.11.5", features = ["tray-icon"] }
+tauri-plugin-dialog = "2.7.1"
+vault-codec = { path = "../../../crates/vault-codec" }
+vault-crypto = { path = "../../../crates/vault-crypto" }
+vault-domain = { path = "../../../crates/vault-domain" }
+vault-extension-service = { path = "../../../crates/vault-extension-service" }
+vault-file = { path = "../../../crates/vault-file" }
+vault-import = { path = "../../../crates/vault-import" }
+vault-platform = { path = "../../../crates/vault-platform" }
+vault-service = { path = "../../../crates/vault-service" }
+zeroize.workspace = true
+
+[lints]
+workspace = true

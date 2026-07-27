@@ -1,0 +1,15 @@
+**/target/
+**/node_modules/
+**/dist/
+/fuzz/artifacts/
+/fuzz/corpus/
+/release/
+.DS_Store
+*.log
+*.vaultx
+*.vaultx.*.tmp
+*.panda8
+*.panda8.*.tmp
+.env
+.env.*
+!.env.example

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StarAxis工具页测试</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const root = Array(16).fill(1);
+      window.__TAURI_INTERNALS__ = {
+        invoke: async (command, args) => {
+          document.documentElement.dataset.lastCommand = command;
+          if (command === "session_state") return "unlocked";
+          if (command === "record_user_activity") return null;
+          if (command === "list_groups")
+            return [{ id: root, parent_id: null, name: "个人保险库" }];
+          if (command === "list_items") return [];
+          if (command === "get_settings")
+            return {
+              auto_lock_seconds: 300,
+              clipboard_clear_seconds: 30,
+              lock_on_minimize: false,
+              backup_versions: 3,
+            };
+          if (command === "plugin:dialog|open")
+            return "/Users/demo/Documents/accounts.csv";
+          if (command === "preview_csv_import_file")
+            return {
+              total_records: 2,
+              source_hash: Array(32).fill(7),
+              records: [
+                {
+                  title: "示例账户",
+                  username: "person@example.com",
+                  url: "https://example.com",
+                  tag_count: 2,
+                },
+                {
+                  title: "服务器",
+                  username: "admin",
+                  url: "https://server.example",
+                  tag_count: 1,
+                },
+              ],
+            };
+          if (command === "commit_csv_import_file") return 2;
+          if (command === "save_vault_with_backup") return null;
+          return null;
+        },
+      };
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

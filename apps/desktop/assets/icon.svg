@@ -1,0 +1,104 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 512 512"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">StarAxis应用图标：北斗</title>
+  <desc id="desc">午夜蓝底色上，北斗七星围绕明亮的枢心。</desc>
+  <defs>
+    <linearGradient
+      id="background"
+      x1="88"
+      y1="56"
+      x2="430"
+      y2="466"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0" stop-color="#182744" />
+      <stop offset="0.56" stop-color="#111b31" />
+      <stop offset="1" stop-color="#0a1223" />
+    </linearGradient>
+    <radialGradient
+      id="halo"
+      cx="0"
+      cy="0"
+      r="1"
+      gradientTransform="translate(255 258) rotate(90) scale(174)"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="#6f91ca" stop-opacity="0.18" />
+      <stop offset="1" stop-color="#6f91ca" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient
+      id="orbit"
+      x1="112"
+      y1="154"
+      x2="382"
+      y2="384"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="#9bb2da" />
+      <stop offset="1" stop-color="#5f769f" />
+    </linearGradient>
+    <linearGradient
+      id="gold"
+      x1="112"
+      y1="150"
+      x2="390"
+      y2="392"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="#ffe4a1" />
+      <stop offset="1" stop-color="#d9aa57" />
+    </linearGradient>
+  </defs>
+
+  <rect
+    x="16"
+    y="16"
+    width="480"
+    height="480"
+    rx="112"
+    fill="url(#background)"
+  />
+  <rect
+    x="17"
+    y="17"
+    width="478"
+    height="478"
+    rx="111"
+    fill="none"
+    stroke="#ffffff"
+    stroke-opacity="0.1"
+    stroke-width="2"
+  />
+  <circle cx="256" cy="256" r="174" fill="url(#halo)" />
+
+  <path
+    d="m116 164 86 38 76-34 90 56-52 82 54 68"
+    fill="none"
+    stroke="url(#orbit)"
+    stroke-width="14"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <g fill="url(#gold)" stroke="#111b31" stroke-width="8">
+    <circle cx="116" cy="164" r="24" />
+    <circle cx="202" cy="202" r="24" />
+    <circle cx="278" cy="168" r="24" />
+    <circle cx="368" cy="224" r="24" />
+    <circle cx="316" cy="306" r="24" />
+    <circle cx="370" cy="374" r="24" />
+  </g>
+
+  <path
+    d="M256 207c6 22 21 37 43 43-22 6-37 21-43 43-6-22-21-37-43-43 22-6 37-21 43-43Z"
+    fill="#f8fbff"
+    stroke="#111b31"
+    stroke-linejoin="round"
+    stroke-width="8"
+  />
+  <circle cx="256" cy="250" r="8" fill="#ffffff" />
+</svg>

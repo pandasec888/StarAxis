@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "tray-unlock-capability",
+  "description": "Minimal core permissions for the macOS menu bar unlock window",
+  "windows": ["tray-unlock"],
+  "permissions": ["core:default"]
+}

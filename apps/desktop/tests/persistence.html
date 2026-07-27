@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StarAxis persistence test harness</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const root = Array(16).fill(1);
+      const stored = JSON.parse(
+        localStorage.getItem("vaultx-persistence-browser-v2") ||
+          '{"items":[],"groups":[],"createCalls":0}',
+      );
+      if (!Array.isArray(stored.groups)) stored.groups = [];
+      if (!stored.groups.length)
+        stored.groups.push({ id: root, parent_id: null, name: "Root" });
+      if (!stored.items.length)
+        stored.items.push({
+          id: Array(16).fill(3),
+          kind: "login",
+          title: "Northstar Account",
+          favorite: true,
+          tags: ["常用"],
+          primary_username: "lin@aurora.studio",
+          primary_url: "https://account.northstar.example",
+          deleted: false,
+        });
+      document.documentElement.dataset.createCalls = String(stored.createCalls);
+      window.__TAURI_INTERNALS__ = {
+        invoke: async (command, args) => {
+          if (command === "session_state") return "unlocked";
+          if (command === "record_user_activity") return null;
+          if (command === "list_groups") return stored.groups;
+          if (command === "get_settings")
+            return {
+              auto_lock_seconds: 300,
+              clipboard_clear_seconds: 30,
+              lock_on_minimize: false,
+              backup_versions: 3,
+            };
+          if (command === "list_items") return stored.items;
+          if (command === "get_item_detail") {
+            document.documentElement.dataset.detailHadMainPassword = String(
+              Object.prototype.hasOwnProperty.call(args || {}, "mainPassword"),
+            );
+            const item =
+              stored.items.find(
+                (candidate) =>
+                  JSON.stringify(candidate.id) === JSON.stringify(args.id),
+              ) || stored.items[0];
+            return {
+              id: item?.id || Array(16).fill(9),
+              group_id: stored.groups[0].id,
+              kind: item?.kind || "login",
+              title: item?.title || "Northstar Account",
+              favorite: item?.favorite ?? true,
+              tags: item?.tags || ["个人", "常用"],
+              usernames: [item?.primary_username || "lin@aurora.studio"],
+              password: "correct-horse-battery-staple",
+              urls: [item?.primary_url || "https://account.northstar.example"],
+              notes: "主账号 · 已启用双重验证",
+              content: null,
+              custom_fields: [],
+              history: [
+                {
+                  index: 0,
+                  revision: 1,
+                  title: item?.title || "Northstar Account",
+                  updated_at_unix_ms: 1753161720000,
+                },
+              ],
+            };
+          }
+          if (command === "create_login") {
+            stored.createCalls += 1;
+            const id = Array(16).fill(Math.min(250, 9 + stored.createCalls));
+            stored.items.push({
+              id,
+              kind: "login",
+              title: args.input.title,
+              favorite: args.input.favorite,
+              tags: args.input.tags,
+              primary_username: args.input.usernames[0],
+              primary_url: args.input.urls[0],
+              deleted: false,
+            });
+            localStorage.setItem(
+              "vaultx-persistence-browser-v2",
+              JSON.stringify(stored),
+            );
+            document.documentElement.dataset.createCalls = String(
+              stored.createCalls,
+            );
+            return id;
+          }
+          if (command === "create_group") {
+            const id = Array(16).fill(7);
+            stored.groups.push({
+              id,
+              parent_id: args.parentId,
+              name: args.name,
+            });
+            localStorage.setItem(
+              "vaultx-persistence-browser-v2",
+              JSON.stringify(stored),
+            );
+            return id;
+          }
+          if (command === "rename_group") {
+            const group = stored.groups.find(
+              (candidate) =>
+                JSON.stringify(candidate.id) === JSON.stringify(args.id),
+            );
+            if (group) group.name = args.name;
+            localStorage.setItem(
+              "vaultx-persistence-browser-v2",
+              JSON.stringify(stored),
+            );
+            return null;
+          }
+          if (command === "delete_group") {
+            const group = stored.groups.find(
+              (candidate) =>
+                JSON.stringify(candidate.id) === JSON.stringify(args.id),
+            );
+            if (group && !group.parent_id) {
+              const replacement = stored.groups.find(
+                (candidate) =>
+                  JSON.stringify(candidate.parent_id) ===
+                  JSON.stringify(group.id),
+              );
+              if (replacement) {
+                replacement.parent_id = null;
+                stored.groups.forEach((candidate) => {
+                  if (
+                    candidate !== replacement &&
+                    JSON.stringify(candidate.parent_id) ===
+                      JSON.stringify(group.id)
+                  )
+                    candidate.parent_id = replacement.id;
+                });
+                stored.groups = stored.groups.filter(
+                  (candidate) => candidate !== group,
+                );
+              }
+            } else if (group) {
+              stored.groups = stored.groups.filter(
+                (candidate) => candidate !== group,
+              );
+            }
+            localStorage.setItem(
+              "vaultx-persistence-browser-v2",
+              JSON.stringify(stored),
+            );
+            return null;
+          }
+          return null;
+        },
+      };
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
