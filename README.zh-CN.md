@@ -1,3 +1,4 @@
+<p align="center">
   <img src="apps/desktop/src-tauri/icons/128x128.png" width="96" height="96" alt="星枢图标">
 </p>
 
