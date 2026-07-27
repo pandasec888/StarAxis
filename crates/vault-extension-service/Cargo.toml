@@ -1,0 +1,32 @@
+[package]
+name = "vault-extension-service"
+description = "StarAxis browser pairing, origin and credential release service"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+aes-gcm.workspace = true
+base64.workspace = true
+hkdf.workspace = true
+interprocess.workspace = true
+p256.workspace = true
+psl.workspace = true
+url.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+thiserror.workspace = true
+vault-domain = { path = "../vault-domain" }
+vault-extension-protocol = { path = "../vault-extension-protocol" }
+vault-platform = { path = "../vault-platform" }
+vault-service = { path = "../vault-service" }
+zeroize.workspace = true
+
+[dev-dependencies]
+tempfile = "3.23.0"
+vault-crypto = { path = "../vault-crypto" }
+
+[lints]
+workspace = true

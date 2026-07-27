@@ -1,0 +1,21 @@
+[package]
+name = "vault-file"
+description = "StarAxis constrained file access and safe-save implementation"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+thiserror.workspace = true
+vault-codec = { path = "../vault-codec" }
+vault-crypto = { path = "../vault-crypto" }
+vault-domain = { path = "../vault-domain" }
+vault-platform = { path = "../vault-platform" }
+zeroize.workspace = true
+
+[dev-dependencies]
+tempfile = "3.23.0"
+
+[lints]
+workspace = true

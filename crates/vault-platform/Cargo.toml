@@ -1,0 +1,13 @@
+[package]
+name = "vault-platform"
+description = "Small audited platform boundary for atomic vault replacement"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2.186"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61.2", features = ["Win32_Foundation", "Win32_Security", "Win32_Security_Authorization", "Win32_Storage_FileSystem"] }

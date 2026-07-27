@@ -1,0 +1,15 @@
+[package]
+name = "vault-extension-host"
+description = "StarAxis Native Messaging host"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+interprocess.workspace = true
+serde_json.workspace = true
+vault-extension-protocol = { path = "../vault-extension-protocol" }
+
+[lints]
+workspace = true
