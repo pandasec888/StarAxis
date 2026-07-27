@@ -1,0 +1,52 @@
+[workspace]
+resolver = "2"
+members = [
+    "apps/desktop/src-tauri",
+    "crates/vault-codec",
+    "crates/vault-crypto",
+    "crates/vault-domain",
+    "crates/vault-extension-host",
+    "crates/vault-extension-protocol",
+    "crates/vault-extension-service",
+    "crates/vault-file",
+    "crates/vault-import",
+    "crates/vault-platform",
+    "crates/vault-service",
+]
+
+[workspace.package]
+version = "1.0.0"
+edition = "2024"
+rust-version = "1.97"
+license = "AGPL-3.0-or-later"
+authors = ["panda8"]
+repository = "https://example.invalid/vaultx"
+
+[workspace.dependencies]
+argon2 = { version = "0.5.3", default-features = false, features = ["alloc", "zeroize"] }
+chacha20poly1305 = { version = "0.10.1", features = ["std"] }
+aes-gcm = "0.10.3"
+base64 = "0.22.1"
+csv = "1.4.0"
+getrandom = "0.4.3"
+hkdf = "0.12.4"
+hmac = "0.12.1"
+interprocess = "2.4.2"
+minicbor = { version = "2.2.2", features = ["full"] }
+p256 = { version = "0.13.2", features = ["ecdh", "ecdsa"] }
+psl = "2.1.220"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+sha2 = "0.10.9"
+subtle = "2.6.1"
+thiserror = "2.0.17"
+url = "2.5.7"
+zeroize = { version = "1.9.0", features = ["derive"] }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+dbg_macro = "deny"
+todo = "deny"
+unwrap_used = "deny"

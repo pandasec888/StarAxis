@@ -1,0 +1,34 @@
+{
+  "name": "vaultx-workspace",
+  "version": "1.0.0",
+  "author": "panda8",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.9.0",
+  "engines": {
+    "node": ">=22.12.0",
+    "pnpm": ">=11.9.0"
+  },
+  "scripts": {
+    "build": "pnpm build:desktop && pnpm build:extension",
+    "build:desktop": "pnpm --filter @vaultx/desktop tauri build --no-bundle",
+    "build:desktop:web": "pnpm --filter @vaultx/desktop build",
+    "build:extension": "cargo build --release -p vault-extension-host && pnpm --filter @vaultx/browser-extension build",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm rust:check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint apps/desktop/src apps/desktop/vite.config.ts apps/browser-extension/src apps/browser-extension/vite.config.ts --max-warnings 0",
+    "rust:check": "cargo fmt --all -- --check && cargo clippy --workspace --all-targets -- -D warnings && cargo test --workspace",
+    "tauri": "pnpm --filter @vaultx/desktop tauri",
+    "test": "pnpm --filter @vaultx/desktop test && pnpm --filter @vaultx/browser-extension test",
+    "typecheck": "pnpm --filter @vaultx/desktop typecheck && pnpm --filter @vaultx/browser-extension typecheck"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.7.0",
+    "globals": "17.7.0",
+    "prettier": "3.9.5",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.64.0"
+  }
+}
