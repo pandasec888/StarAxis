@@ -15,7 +15,9 @@
 StarAxis (星枢) is a password and notes manager that stores all data locally in
 a portable, encrypted `.panda8` vault. It does not use SQLite, does not require
 an account, and does not upload your vault to a remote service.
-
+![](img/sy-en.jpg)
+![](img/bxk-en.jpg)
+![](img/bxk-en1.jpg)
 ## Highlights
 
 - Portable, encrypted `.panda8` vaults with a user-selected file location
