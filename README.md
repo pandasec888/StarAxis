@@ -67,7 +67,7 @@ Packaged development builds, when available, are documented under
 [`release/`](release/). Windows and macOS may warn about an unknown developer
 until signed releases are available.
 
-## ## Contributing
+## Contributing
 
 Bug reports, design discussions, tests, documentation improvements, and
 well-scoped pull requests are welcome.
